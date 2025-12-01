@@ -119,7 +119,7 @@ function App() {
 
   return (
     <>
-      <div className="relative w-screen h-[100dvh] py-4 overflow-hidden">
+      <div className="relative w-screen h-screen py-4 overflow-hidden">
         <img
           src={
             step == 1
