@@ -118,7 +118,7 @@ const Step6 = ({ setState }: Step6Props) => {
           <div className="absolute w-[75%] text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex w-full">
               <button
-                className={`w-full px-4 py-2 rounded-t-xl  ${
+                className={`w-full px-4 py-2 rounded-t-xl uppercase text-xl ${
                   activeTab === "hand"
                     ? "bg-[#f3b266] text-white font-bold "
                     : "bg-gray-200 text-gray-400 "
