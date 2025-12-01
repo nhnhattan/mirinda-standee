@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import SignaturePad from "signature_pad";
 
 type Step6Props = {
@@ -200,6 +201,12 @@ const Step6 = ({ setState }: Step6Props) => {
             <button
               onClick={() => {
                 setSignatureImg(null);
+                clearPad()
+                toast.loading("Đang kiểm tra...")
+                setTimeout(()=>{
+                  toast.dismiss()
+                  toast.success("Gửi xác nhận in thành công!")
+                }, 1000)
               }}
               className="w-3/4 mx-auto flex items-center justify-center relative cursor-pointer hover:scale-110 hover:opacity-80 transition-all"
             >

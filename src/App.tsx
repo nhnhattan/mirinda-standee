@@ -24,7 +24,7 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -48,7 +48,7 @@ function App() {
     console.log("Submitted:", data);
     toast.success("Gửi thành công!");
     setStep(2);
-    reset()
+    reset();
   };
 
   const capture = useCallback(() => {
@@ -435,6 +435,8 @@ function App() {
                         if (isPhoto) {
                           console.log(isPhoto);
                           setStep(5);
+                          setIsPhoto("");
+                          setLoading(true);
                         } else {
                           toast.error("Tải ảnh thất bại");
                         }
@@ -469,7 +471,6 @@ function App() {
                     setStep(3);
                     setSelected(0);
                     setLoading(true);
-                    setIsPhoto("");
                   }}
                   className="w-1/6 flex flex-col items-center justify-center cursor-pointer hover:scale-110"
                 >
@@ -483,6 +484,8 @@ function App() {
                     if (isPhoto) {
                       console.log(isPhoto);
                       setStep(5);
+                      setIsPhoto("");
+                      setLoading(true);
                     } else {
                       toast.error("Tải ảnh thất bại");
                     }
@@ -502,8 +505,8 @@ function App() {
             setState={() => {
               setStep(6);
             }}
-            setReset={()=>{
-              setStep(1)
+            setReset={() => {
+              setStep(1);
             }}
           />
         ) : (
