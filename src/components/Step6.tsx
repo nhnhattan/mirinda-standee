@@ -112,8 +112,8 @@ const Step6 = ({ setState }: Step6Props) => {
       <div className="flex flex-col gap-3 items-center">
         <img src="/bg/stepPrinpt.png" alt="" className="w-2/5" />
 
-        <div className="w-full rounded-xl p-4  relative  flex flex-col items-center justify-center shadow">
-          <img src="/bg/frame.png" alt="" className="bg-form h-full" />
+        <div className="w-full h-full rounded-xl p-4 relative  flex flex-col items-center justify-center shadow">
+          <img src="/bg/frame.png" alt="" className="bg-form" />
 
           <div className="absolute w-[75%] text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex w-full">
