@@ -1,0 +1,64 @@
+.bg-form {
+  /* background-image: url("/bg/frame.png"); */
+  background-size: 100% 100%;
+  background-position: top;
+  /* width: 100%; */
+  overflow: hidden;
+}
+
+.bg-btn {
+  background-image: url("/bg/bgButton.png");
+  background-size: 100% 100%;
+  background-position: top;
+  /* width: 100%; */
+  overflow: hidden;
+}
+
+.bg-linear {
+  background: #fff3c7;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 243, 199, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.bg-button {
+  background: #fff3c7;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 243, 199, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.option-container {
+  display: flex;
+  gap: 2rem;
+  /* background: rgba(255, 255, 255, 0.4); */
+  padding: 0.5rem 2rem;
+}
+
+.option-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.option-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Khi được chọn: transparent + scale */
+.option-card.active {
+  background: transparent;
+  backdrop-filter: none;
+  transform: scale(1.5);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
