@@ -119,7 +119,7 @@ function App() {
 
   return (
     <>
-      <div className="relative w-screen h-screen py-4 overflow-hidden">
+      <div className="relative w-screen h-[100dvh] py-4 overflow-hidden">
         <img
           src={
             step == 1
@@ -131,7 +131,7 @@ function App() {
               : "/bg/BG.png"
           }
           alt=""
-          className="absolute top-0 left-0 h-screen w-screen -z-[1]"
+          className="absolute top-0 left-0 h-screen! w-screen -z-[1]"
         />
         {step == 1 ? (
           <>
