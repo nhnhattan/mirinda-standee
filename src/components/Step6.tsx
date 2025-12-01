@@ -10,7 +10,7 @@ const Step6 = ({ setState }: Step6Props) => {
   const sigPad = useRef<SignaturePad | null>(null);
 
   const [signatureImg, setSignatureImg] = useState<string | null>(null);
-  const [typeName, setTypeName] = useState("");
+  // const [typeName, setTypeName] = useState("");
 
   // Tab: 'typed' = nhập tên, 'hand' = ký tay
   const [activeTab, setActiveTab] = useState<"typed" | "hand">("hand");
@@ -49,63 +49,62 @@ const Step6 = ({ setState }: Step6Props) => {
     setSignatureImg(img);
   };
 
-  const normalizeName = (str: string) => {
-    return str
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/đ/g, "d")
-      .replace(/Đ/g, "d");
-    //   .toLowerCase();
-  };
+  // const normalizeName = (str: string) => {
+  //   return str
+  //     .normalize("NFD")
+  //     .replace(/[\u0300-\u036f]/g, "")
+  //     .replace(/đ/g, "d")
+  //     .replace(/Đ/g, "d");
+  //   //   .toLowerCase();
+  // };
 
-  const generateTypedSignature = () => {
-    if (!typeName.trim()) return;
+  // const generateTypedSignature = () => {
+  //   if (!typeName.trim()) return;
 
-    const cleanName = normalizeName(typeName);
-    const canvas = document.createElement("canvas");
-    canvas.width = 900;
-    canvas.height = 680;
+  //   const cleanName = normalizeName(typeName);
+  //   const canvas = document.createElement("canvas");
+  //   canvas.width = 900;
+  //   canvas.height = 680;
 
-    const ctx = canvas.getContext("2d")!;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   const ctx = canvas.getContext("2d")!;
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.font = "140px 'Great Vibes', cursive";
-    ctx.fillStyle = "#000";
-    ctx.textBaseline = "middle";
+  //   ctx.font = "140px 'Great Vibes', cursive";
+  //   ctx.fillStyle = "#000";
+  //   ctx.textBaseline = "middle";
 
-    const maxWidth = canvas.width - 80;
-    const words = cleanName.split(" ");
-    const lines: string[] = [];
-    let currentLine = "";
+  //   const maxWidth = canvas.width - 80;
+  //   const words = cleanName.split(" ");
+  //   const lines: string[] = [];
+  //   let currentLine = "";
 
-    // Wrap chữ
-    for (const word of words) {
-      const testLine = currentLine ? currentLine + " " + word : word;
-      const { width: testWidth } = ctx.measureText(testLine);
-      if (testWidth > maxWidth) {
-        if (currentLine) lines.push(currentLine);
-        currentLine = word;
-      } else {
-        currentLine = testLine;
-      }
-    }
-    if (currentLine) lines.push(currentLine);
+  //   // Wrap chữ
+  //   for (const word of words) {
+  //     const testLine = currentLine ? currentLine + " " + word : word;
+  //     const { width: testWidth } = ctx.measureText(testLine);
+  //     if (testWidth > maxWidth) {
+  //       if (currentLine) lines.push(currentLine);
+  //       currentLine = word;
+  //     } else {
+  //       currentLine = testLine;
+  //     }
+  //   }
+  //   if (currentLine) lines.push(currentLine);
 
-    // Vẽ từng dòng, căn giữa
-    const lineHeight = 180; // gần bằng size font
-    const totalHeight = lines.length * lineHeight;
-    let startY = (canvas.height - totalHeight) / 2 + lineHeight / 2;
+  //   const lineHeight = 180;
+  //   const totalHeight = lines.length * lineHeight;
+  //   let startY = (canvas.height - totalHeight) / 2 + lineHeight / 2;
 
-    lines.forEach((line) => {
-      const textWidth = ctx.measureText(line).width;
-      const x = (canvas.width - textWidth) / 2;
-      ctx.fillText(line, x, startY);
-      startY += lineHeight;
-    });
+  //   lines.forEach((line) => {
+  //     const textWidth = ctx.measureText(line).width;
+  //     const x = (canvas.width - textWidth) / 2;
+  //     ctx.fillText(line, x, startY);
+  //     startY += lineHeight;
+  //   });
 
-    const img = canvas.toDataURL("image/png");
-    setSignatureImg(img);
-  };
+  //   const img = canvas.toDataURL("image/png");
+  //   setSignatureImg(img);
+  // };
 
   return (
     <>
@@ -118,16 +117,16 @@ const Step6 = ({ setState }: Step6Props) => {
           <div className="absolute w-[75%] text-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="flex w-full">
               <button
-                className={`w-1/2 px-4 py-2 rounded-tl-xl  ${
+                className={`w-full px-4 py-2 rounded-t-xl  ${
                   activeTab === "hand"
-                    ? "bg-[#f3b266] text-white font-bold border-r-2"
-                    : "bg-gray-200 text-gray-400 border-none"
+                    ? "bg-[#f3b266] text-white font-bold "
+                    : "bg-gray-200 text-gray-400 "
                 }`}
                 onClick={() => setActiveTab("hand")}
               >
                 Ký tên
               </button>
-              <button
+              {/* <button
                 className={`w-1/2 px-4 py-2 rounded-tr-xl ${
                   activeTab === "typed"
                     ? "bg-[#f3b266] text-white font-bold border-l-2"
@@ -136,10 +135,10 @@ const Step6 = ({ setState }: Step6Props) => {
                 onClick={() => setActiveTab("typed")}
               >
                 Nhập tên
-              </button>
+              </button> */}
             </div>
 
-            {activeTab === "typed" && (
+            {/* {activeTab === "typed" && (
               <div className="w-full">
                 <input
                   type="text"
@@ -158,7 +157,7 @@ const Step6 = ({ setState }: Step6Props) => {
                   </button>
                 </div>
               </div>
-            )}
+            )} */}
 
             {activeTab === "hand" && (
               <div>
