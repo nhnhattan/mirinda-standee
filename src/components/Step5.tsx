@@ -16,7 +16,7 @@ const Step5 = ({ setState, setReset }: Step5Props) => {
             <img src="/bg/downloadBtn.png" alt="" className="w-full" />
           </button>
           <button onClick={setReset} className="w-1/2 flex items-center justify-center relative cursor-pointer hover:scale-110 hover:opacity-80 transition-all">
-            <img src="/bg/remake.png" alt="" className="w-full" />
+            <img src="/bg/bgButton.png" alt="" className="w-full" />
           </button>
         </div>
         <button

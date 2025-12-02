@@ -11,6 +11,7 @@ const Step6 = ({ setState }: Step6Props) => {
   const sigPad = useRef<SignaturePad | null>(null);
 
   const [signatureImg, setSignatureImg] = useState<string | null>(null);
+  const [completed, setCompleted] = useState(false);
   // const [typeName, setTypeName] = useState("");
 
   // Tab: 'typed' = nhập tên, 'hand' = ký tay
@@ -201,16 +202,35 @@ const Step6 = ({ setState }: Step6Props) => {
             <button
               onClick={() => {
                 setSignatureImg(null);
-                clearPad()
-                toast.loading("Đang kiểm tra...")
-                setTimeout(()=>{
-                  toast.dismiss()
-                  toast.success("Gửi xác nhận in thành công!")
-                }, 1000)
+                clearPad();
+                toast.loading("Đang kiểm tra...");
+                setTimeout(() => {
+                  toast.dismiss();
+                  toast.success("Gửi xác nhận in thành công!");
+                  setCompleted(true);
+                }, 1000);
               }}
               className="w-3/4 mx-auto flex items-center justify-center relative cursor-pointer hover:scale-110 hover:opacity-80 transition-all"
             >
               <img src="/bg/sendSig.png" alt="" className="w-full" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {completed && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 backdrop-blur-sm">
+          <div className="bg-[#e77b29] text-white p-5 rounded-xl shadow-xl max-w-xl w-4/5 text-center">
+            <h2 className="text-xl font-semibold mb-3">Cảm ơn bạn đã tham gia!</h2>
+
+            <button
+              onClick={() => {
+                setCompleted(false)
+              }}
+              className="w-[60%] py-2 mx-auto flex items-center justify-center relative cursor-pointer hover:scale-110 hover:opacity-80 transition-all"
+            >
+              <img src="/bg/bgButton.png" alt="" className="w-full" />
+              <p className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold uppercase text-lg ">Đóng</p>
             </button>
           </div>
         </div>

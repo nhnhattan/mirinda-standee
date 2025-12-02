@@ -55,7 +55,6 @@
   border-radius: 5px;
 }
 
-/* Khi được chọn: transparent + scale */
 .option-card.active {
   background: transparent;
   backdrop-filter: none;

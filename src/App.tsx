@@ -1,12 +1,20 @@
 import "./App.css";
 import { useForm } from "react-hook-form";
 import Webcam from "react-webcam";
+import Select from "react-select";
+import { Controller } from "react-hook-form";
+import { provinces } from "vietnam-provinces";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import toast from "react-hot-toast";
 import { useCallback, useRef, useState } from "react";
 import Step5 from "./components/Step5";
 import Step6 from "./components/Step6";
+
+type ProvinceOption = {
+  value: string;
+  label: string;
+};
 
 function App() {
   const formSchema = z.object({
@@ -20,11 +28,20 @@ function App() {
     province: z.string().min(1, "Tỉnh không được bỏ trống"),
   });
 
+  // const { control } = useFormContext();
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const provinceOptions: ProvinceOption[] = provinces.map((p) => ({
+    value: p.code,
+    label: p.name,
+  }));
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm({
     resolver: zodResolver(formSchema),
   });
@@ -39,13 +56,26 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [cameraError, setCameraError] = useState(false);
 
+  function getProvinceName(code: string): string {
+    const province = provinces.find((p) => p.code === code);
+    return province ? province.name : code;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onSubmit = (data: any) => {
     if (Object.keys(errors).length > 0) {
       return toast.error("Vui lòng nhập đúng thông tin!");
     }
 
-    console.log("Submitted:", data);
+    const provinceName = getProvinceName(data.province);
+
+    const dataWithProvinceName = {
+      ...data,
+      province: provinceName,
+    };
+
+    console.log("Submitted with province name:", dataWithProvinceName);
+
     toast.success("Gửi thành công!");
     setStep(2);
     reset();
@@ -219,11 +249,75 @@ function App() {
                       >
                         TỈNH
                       </label>
-                      <input
-                        type="text"
-                        id="province"
-                        {...register("province")}
-                        className="bg-transparent w-[60%] text-xs py-1 text-[#F73232] text-center outline-[#e67a30]"
+
+                      <Controller
+                        name="province"
+                        control={control}
+                        render={({ field }) => (
+                          <Select<ProvinceOption>
+                            options={provinceOptions}
+                            placeholder="Chọn tỉnh"
+                            className="w-[80%] text-xs"
+                            value={
+                              provinceOptions.find(
+                                (opt) => opt.value === field.value
+                              ) || null
+                            }
+                            onChange={(option) => field.onChange(option?.value)}
+                            onBlur={field.onBlur}
+                            name={field.name}
+                            styles={{
+                              singleValue: (base) => ({
+                                ...base,
+                                fontSize: "10px",
+                                color: "#F73232",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                              }),
+                              placeholder: (base) => ({
+                                ...base,
+                                fontSize: "10px",
+                                color: "#f5a8a8",
+                              }),
+                              menu: (base) => ({
+                                ...base,
+                                borderBottomRightRadius: "6px",
+                                borderBottomLeftRadius: "6px",
+                                backgroundColor: "white",
+                                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+                                marginTop: 4,
+                                zIndex: 9999,
+                                minWidth: "100%",
+                              }),
+                              menuList: (base) => ({
+                                ...base,
+                                maxHeight: 100,
+                                overflowY: "auto",
+                                borderRadius: "1rem",
+                              }),
+                              option: (base, state) => ({
+                                ...base,
+                                backgroundColor: state.isSelected
+                                  ? "#3399FF"
+                                  : "white",
+                                color: state.isSelected ? "white" : "black",
+                                cursor: "pointer",
+                                padding: "3px 10px",
+                                minHeight: "20px",
+                                lineHeight: "20px",
+                                textAlign: "left",
+                                ":hover": {
+                                  backgroundColor: state.isSelected
+                                    ? "#3399FF"
+                                    : "#f0f0f0",
+                                },
+                                textTransform: "uppercase",
+                                fontSize: "10px",
+                              }),
+                            }}
+                          />
+                        )}
                       />
                     </div>
 
@@ -507,8 +601,8 @@ function App() {
             }}
             setReset={() => {
               setStep(2);
-              setGender("")
-              setSelected(0)
+              setGender("");
+              setSelected(0);
             }}
             // setRemake=
           />
