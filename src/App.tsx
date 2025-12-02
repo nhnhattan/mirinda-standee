@@ -506,8 +506,11 @@ function App() {
               setStep(6);
             }}
             setReset={() => {
-              setStep(1);
+              setStep(2);
+              setGender("")
+              setSelected(0)
             }}
+            // setRemake=
           />
         ) : (
           <Step6
